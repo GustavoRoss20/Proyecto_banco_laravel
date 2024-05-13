@@ -1,0 +1,78 @@
+.main-container {
+  margin-top: 70px;
+}
+
+.imagen-epica {
+  margin-top: 50px;
+  width: 800px;
+}
+
+.imagen-no_papu {
+  width: 300px
+}
+
+.logo-laravel-contenedor {
+  display: flex;
+  justify-content: center;
+}
+
+.laravel-logo {
+  width: 80px;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    /* Escala normal al principio */
+  }
+
+  50% {
+    transform: scale(1.1);
+    /* Escala aumentada a la mitad */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Escala normal al final */
+  }
+}
+
+.centro {
+  /* width: 500px; */
+  max-width: 500px;
+  /* height: auto; */
+  padding-block-end: 10px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  /* top: 40px; left: 40px; */
+  /* position: absolute; */
+  top: 10%;
+  left: 50%;
+  margin-top: 80px;
+  /*Agregar fuente*/
+}
+
+.titulo {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.centrotabla {
+  max-width: 90%;
+  /* Establece un ancho máximo en porcentaje */
+  padding-block-end: 10px;
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  background-color: white;
+  top: 10%;
+  bottom: 0;
+  position: fixed;
+  margin-bottom: 10px;
+  margin-top: 15px;
+  border-right-width: 80px;
+  border-left-width: 80px;
+}
