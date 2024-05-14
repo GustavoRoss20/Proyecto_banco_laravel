@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prestamos', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('cliente_id');
-            $table->string('referencia');
-            $table->double('total_prestado');
-            $table->boolean('liquidado');            
-            $table->timestamps();
+        Schema::table('cat_servicios', function (Blueprint $table) {
+            $table->double('precio');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prestamos');
+        Schema::table('cat_servicios', function (Blueprint $table) {
+            $table->dropColumn('precio'); // Si necesitas revertir la migración
+        });
     }
 };

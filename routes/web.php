@@ -3,6 +3,7 @@
 use App\Http\Controllers\FilesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OperationsController;
 use App\Http\Controllers\UserController;
 
 Route::get('/healthcheck', function () {
@@ -49,6 +50,10 @@ Route::get('/files/xml', function () {
     return view('files.xml');
 })->middleware('auth');
 
+Route::get('/files/import', function () {
+    return view('files.import');
+})->middleware('auth');
+
 Route::get('/files/charts', [UserController::class, 'showDataCharts'])->middleware('auth')->name('chartsShowData');
 
 Route::post('/files/getData',[FilesController::class, 'GetDataUsers'])->name('Data.Charts');
@@ -75,10 +80,13 @@ Route::get('/operations/service_payment', function () {
     return view('operations.service_payment');
 })->middleware('auth');
 
-Route::get('/operations/transfers', function () {
-    return view('operations.transfers');
-})->middleware('auth');
+Route::get('/operations/service_payment', [OperationsController::class, 'GetCatServices'])->middleware('auth')->name('show.cat.services');
+    //RUTAS 
+Route::get('/operations/transfers', [OperationsController::class, 'GetUsersWithIds'])->middleware('auth')->name('show.ids.users');
 
+Route::post('/operations/validation/Transfers', [OperationsController::class, 'Transfers'])->name('opt.transfers');
+
+Route::post('/operatiosn/validation/Pays', [OperationsController::class, 'PayServices'])->name('opt.pay.services');
 //financial_statements's rutes
 
 Route::get('/financial_statements/balance', function () {

@@ -74,6 +74,13 @@
                                     href="{{ url('/files/csv') }}">Archivos CSV</a></li>
                             <li><a class="dropdown-item {{ Request::is('files/xml') ? 'active' : '' }}"
                                     href="{{ url('/files/xml') }}">Archivos XML</a></li>
+                            {{-- <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li>
+                                <a class="dropdown-item {{ Request::is('files/charts') ? 'active' : '' }}"
+                                    href="{{ url('/files/import') }}">Importar</a>
+                            </li> --}}
                             <li>
                                 <hr class="dropdown-divider" />
                             </li>
