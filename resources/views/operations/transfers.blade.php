@@ -35,11 +35,11 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                      <label for="parametro" class="form-label"><strong>Saldo:</strong> @auth
-                              ${{ Auth::user()->saldo }}
-                          @endauth
-                      </label>
-                  </div>
+                        <label for="parametro" class="form-label"><strong>Saldo:</strong> @auth
+                                ${{ Auth::user()->saldo }}
+                            @endauth
+                        </label>
+                    </div>
                     @csrf
                     <div class="mb-3">
                         <label for="comparacion" class="form-label"><strong>Transferir a:</strong> </label>
@@ -65,22 +65,4 @@
             </div>
         </div>
     </div>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          const usuarioSelect = document.getElementById('usuario');
-          const botonSubmit = document.getElementById('botonSubmit');
-      
-          usuarioSelect.addEventListener('change', function () {
-              // Si el valor seleccionado es la cadena vacía, deshabilita el botón
-              if (this.value === '') {
-                  botonSubmit.disabled = true;
-              } else {
-                  // De lo contrario, habilita el botón
-                  botonSubmit.disabled = false;
-              }
-          });
-            
-      });
-      </script>
-      
 @endsection

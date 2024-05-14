@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\FinancialStatementsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\OperationsController;
@@ -87,15 +88,21 @@ Route::get('/operations/transfers', [OperationsController::class, 'GetUsersWithI
 Route::post('/operations/validation/Transfers', [OperationsController::class, 'Transfers'])->name('opt.transfers');
 
 Route::post('/operatiosn/validation/Pays', [OperationsController::class, 'PayServices'])->name('opt.pay.services');
+
+Route::post('/operations/validationDeposits', [OperationsController::class, 'ToDeposit'])->name('opt.deposits');
+
 //financial_statements's rutes
 
-Route::get('/financial_statements/balance', function () {
-    return view('financial_statements.balance');
+Route::get('financial_statements/apply_for_loan', function () {
+    return view('financial_statements.apply_for_loan');
 })->middleware('auth');
+Route::get('/financial_statements/balance', [FinancialStatementsController::class, 'getSaldoData'])->middleware('auth');
 
-Route::get('/financial_statements/loans', function () {
-    return view('financial_statements.loans');
-})->middleware('auth');
+Route::get('/financial_statements/loans', [FinancialStatementsController::class, 'getInfoLoans'])->middleware('auth');
+
+Route::post('financial_statements/insert.loans', [FinancialStatementsController::class, 'InsertLoans'])->name('insert.loans');
+
+Route::post('financial_statements/pay.loans', [FinancialStatementsController::class, 'payLoan'])->name('pay.loans');
 
 // Rutas de autenticación
 Route::post('/login', [LoginController::class, 'login'])->name('loginAuth');

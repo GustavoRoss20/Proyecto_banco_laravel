@@ -19,9 +19,8 @@
                         };
                     </script>
                 @endif
-                <h1 class="text-center t1">Depositos</h1>
-                <form method="post" action="{{ route('opt.deposits') }}" name="exportar_form" id="exportar_form"
-                    class="form-floating">
+                <h1 class="text-center t1">Solicitar prestamo</h1>
+                <form method="post" action="{{ route('insert.loans') }}" name="exportar_form" id="exportar_form" class="form-floating">
                     <div class="mb-3">
                         <label for="parametro" class="form-label"><strong>Id:</strong> @auth
                                 {{ Auth::user()->id }}
@@ -35,24 +34,35 @@
                         </label>
                     </div>
                     <div class="mb-3">
-                      <label for="parametro" class="form-label"><strong>Saldo:</strong> @auth
-                              ${{ Auth::user()->saldo }}
-                          @endauth
-                      </label>
-                  </div>
-                    @csrf                    
+                        <label for="parametro" class="form-label"><strong>Saldo:</strong> @auth
+                                ${{ Auth::user()->saldo }}
+                            @endauth
+                        </label>
+                    </div>
+                    @csrf
                     <div class="mb-3">
-                        <label for="monto" class="form-label"><strong>Monto a depositar en la cuenta: </strong></label>
+                        <label for="monto" class="form-label"><strong>Referencia</strong></label>
+                        <input type="text" class="form-control" id="referencia" name="referencia" required
+                            placeholder="Ingrese la referencia">
+                    </div>
+                    <div class="mb-3">
+                        <label for="monto" class="form-label"><strong>Monto</strong></label>
                         <input type="number" class="form-control" id="monto" name="monto" required
                             placeholder="Ingrese el total" min="1">
                     </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" name="TXT" id="TXT"
-                            class="btn btn-outline-primary btn-lg">Depositar</button>
+                    <div class="mb-3">
+                        <label for="montoTotal" class="form-label"><strong>Total a pagar:</strong></label>
+                        <input type="text" class="form-control" id="montoTotal" name="montoTotal"
+                            placeholder="0"readonly required>
                     </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" name="loans" id="loans" data-bs-target="#screen_accept"
+                            class="btn btn-outline-primary btn-lg">Solicitar</button>
+                    </div>
+
                 </form>
             </div>
         </div>
-    </div>  
-      
+    </div>
+    <script src="{{ asset('js/loans.js') }}"></script>
 @endsection

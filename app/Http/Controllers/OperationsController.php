@@ -6,6 +6,7 @@ use App\Models\Services;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Blueprint\Blueprint;
 use Illuminate\Support\Facades\DB;
 
 class OperationsController extends Controller
@@ -49,7 +50,7 @@ class OperationsController extends Controller
 
             try {
 
-                DB::statement('call sp_insert_transaccion(?,?,?,?,?)', [$userId, $userId2, $saldoNuevo1, $saldoNuevo2, $saldo]);
+                DB::statement('CALL sp_insert_transaccion(?,?,?,?,?)', [$userId, $userId2, $saldoNuevo1, $saldoNuevo2, $saldo]);
 
                 return redirect()->back()->with('success', 'Transferencia realizada con exito.');
             } catch (\Exception $e) {
@@ -63,23 +64,44 @@ class OperationsController extends Controller
         if (Auth::check()) {
             $userId = Auth::id();
 
-            $precio = $request->input('servicio');
+            $price = $request->input('servicio');
 
             $data = User::select('id', 'saldo')->where('id', '=', $userId)->first();
 
-            if ($data->saldo < $precio) {
+            if ($data->saldo < $price) {
                 return redirect()->back()->with('error', 'No cuentas con el saldo suficiente.');
             }
 
-            $saldoNuevo = $data->saldo - $precio;
+            $newSaldo = $data->saldo - $price;
 
             try {
 
-                DB::statement('call sp_pagar_servicios(?,?,?)', [$userId, $saldoNuevo, $precio]);
+                DB::statement('CALL sp_pagar_servicios(?,?,?)', [$userId, $newSaldo, $price]);
 
                 return redirect()->back()->with('success', 'Pago realizado con exito.');
             } catch (\Exception $e) {
                 return redirect()->back()->with('error', 'Hubo un error en el pago.');
+            }
+        }
+    }
+
+    public function ToDeposit(Request $request)
+    {
+        if (Auth::check()) {
+            $userId = Auth::id();
+
+            $deposit = $request->input('monto');
+
+            $data = User::select('id', 'saldo')->where('id', '=', $userId)->first();
+
+            $newSaldo = $data->saldo + $deposit;
+
+            try {
+                DB::statement('CALL sp_realizar_deposito(?,?,?)', [$userId, $newSaldo, $deposit]);
+
+                return redirect()->back()->with('success', 'Deposito exitoso');
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Hubo un error en el deposito.');
             }
         }
     }

@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('prestamos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cliente_id');
-            $table->string('referencia');
+            $table->string('referencia');            
             $table->double('total_prestado');
+            $table->double('total_pagar');
             $table->boolean('liquidado');            
             $table->timestamps();
         });

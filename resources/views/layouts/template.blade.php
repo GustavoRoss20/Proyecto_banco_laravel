@@ -125,6 +125,8 @@
                             Estados financieros
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {{ Request::is('financial_statements/apply_for_loan') ? 'active' : '' }}"
+                                href="{{ url('/financial_statements/apply_for_loan') }}">Solicitar prestamos</a></li>
                             <li><a class="dropdown-item {{ Request::is('financial_statements/loans') ? 'active' : '' }}"
                                     href="{{ url('/financial_statements/loans') }}">Prestamos</a></li>
                             <li><a class="dropdown-item {{ Request::is('financial_statements/balance') ? 'active' : '' }}"
