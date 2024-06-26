@@ -1,2 +1,2 @@
 # Proyecto_banco_laravel
-Proyectpo escolar hecho con Laravel 11 y blade
+Proyecto escolar hecho con Laravel 11, blade y mysql
